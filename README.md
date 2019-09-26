@@ -6,11 +6,12 @@ This server is based on a JSON db, so you don't have a heavy / complicated insta
 
 # Install : 
 
-## prerequisite
+## Prerequisite
 you'll need npm and git installed on your machine.
 
 I recommand installing nvm ( node version manager ), instructions on github repo.
 
+## Setup
 1) clone this repo on your local machine.
 2) go inside the folder
 3) run ```npm install``` in the terminal
