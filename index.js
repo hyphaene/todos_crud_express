@@ -10,24 +10,12 @@ const adapter = new FileSync('db.json');
 const db = low(adapter);
 
 // Set some defaults (required if your JSON file is empty)
-db.defaults({ todos: [] }).write();
-const todos = db.get('todos').value();
-console.log(todos);
-// Add a post
+db.defaults({ todos: [{ id: uuid(), title: 'lowdb is awesoooome' }] }).write();
 
 const getIdFromRequest = req => req.params.id;
 
-if (!todos.length) {
-	db.get('todos')
-		.push({ id: uuid(), title: 'lowdb is awesoooome' })
-		.write();
-}
-
 app.get('/', function(req, res) {
 	res.send('Hello World!');
-});
-app.get('/test', function(req, res) {
-	res.send('Hello World! test');
 });
 
 // get All
@@ -39,9 +27,6 @@ app.get('/todos', function(req, res) {
 
 // getOne
 app.get('/todos/:id', function(req, res) {
-	const todos = db.get('todos').value();
-
-	console.log({ todos });
 	const id = getIdFromRequest(req);
 	const result = db
 		.get('todos')
@@ -64,7 +49,7 @@ app.post('/todos', function(req, res) {
 		// update
 		if (id) {
 			console.log('if element');
-			db.get('todos')
+			todos
 				.find({ id })
 				.assign(req.body)
 				.write();
@@ -76,9 +61,7 @@ app.post('/todos', function(req, res) {
 
 			const newTodo = { ...req.body, id: uuid() };
 			console.log({ newTodo });
-			db.get('todos')
-				.push(newTodo)
-				.write();
+			todos.push(newTodo).write();
 			res.send(newTodo);
 		}
 
