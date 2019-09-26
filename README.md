@@ -19,6 +19,8 @@ I recommand installing nvm ( node version manager ), instructions on github repo
 
 You have to let the process in the terminal keep running for the API to be available.
 
+The server runs on port 4000
+
 Routes and verbs to use : 
 
 /todos => GET : returns all todos
@@ -28,12 +30,12 @@ Routes and verbs to use :
 
 example with axios calls 
 
-axios.get('http://localhost:3000/todos)
+axios.get('http://localhost:4000/todos)
 
-axios.get('http://localhost:3000/todos/uuujzf-zenzfjezf-)
+axios.get('http://localhost:4000/todos/uuujzf-zenzfjezf-)
 
-axios.delete('http://localhost:3000/todos/rhgeu-huhuh-uh-hu)
+axios.delete('http://localhost:4000/todos/rhgeu-huhuh-uh-hu)
 
-axios.post('http://localhost:3000/todos)
+axios.post('http://localhost:4000/todos)
 
-axios.get('http://localhost:3000/todos)
+axios.get('http://localhost:4000/todos)
