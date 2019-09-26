@@ -2,9 +2,12 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const low = require('lowdb');
+const cors = require('cors');
 const FileSync = require('lowdb/adapters/FileSync');
 app.use(express.json()); // for parsing application/json
 app.use(bodyParser());
+app.use(cors());
+
 const uuid = require('uuid/v4');
 const adapter = new FileSync('db.json');
 const db = low(adapter);
