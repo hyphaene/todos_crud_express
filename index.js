@@ -29,11 +29,15 @@ app.get('/', function(req, res) {
 app.get('/test', function(req, res) {
 	res.send('Hello World! test');
 });
+
+// get All
 app.get('/todos', function(req, res) {
 	const todos = db.get('todos').value();
 
 	res.send(todos);
 });
+
+// getOne
 app.get('/todos/:id', function(req, res) {
 	const todos = db.get('todos').value();
 
@@ -64,22 +68,24 @@ app.post('/todos', function(req, res) {
 				.find({ id })
 				.assign(req.body)
 				.write();
+			res.send(req.body);
+
 			// create
 		} else {
 			console.log('else');
 
 			const newTodo = { ...req.body, id: uuid() };
-
+			console.log({ newTodo });
 			db.get('todos')
-				.push(req.body)
+				.push(newTodo)
 				.write();
+			res.send(newTodo);
 		}
 
 		console.log(body);
-
-		res.send('ok');
 	} catch (error) {
 		console.log(error);
+		res.send('error');
 	}
 });
 
