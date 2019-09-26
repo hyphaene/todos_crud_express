@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const low = require('lowdb');
 const cors = require('cors');
 const FileSync = require('lowdb/adapters/FileSync');
+
 app.use(express.json()); // for parsing application/json
 app.use(bodyParser());
 app.use(cors());
@@ -90,5 +91,5 @@ app.delete('/todos/:id', function(req, res) {
 });
 
 app.listen(4000, function() {
-	console.log('Example app listening on port 3000!');
+	console.log(`Example app listening on port ${4000}`;
 });
