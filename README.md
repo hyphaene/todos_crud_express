@@ -24,8 +24,11 @@ The server runs on port 4000
 Routes and verbs to use : 
 
 /todos => GET : returns all todos
+
 /todos/<id> => GET : return one todo
+
 /todos => POST : create or update a todo depending on id 
+
 /todos/<id> => DELETE : delete the todo associated to the id
 
 example with axios calls 
