@@ -5,7 +5,7 @@ const low = require('lowdb');
 const cors = require('cors');
 const FileSync = require('lowdb/adapters/FileSync');
 
-app.use(express.json()); // for parsing application/json
+app.use(express.json());
 app.use(bodyParser());
 app.use(cors());
 
@@ -41,7 +41,7 @@ app.get('/todos/:id', function(req, res) {
 	res.send(result);
 });
 
-// create / update a post
+// create a post
 app.post('/todos', function(req, res) {
 	try {
 		const todos = db.get('todos');
@@ -52,12 +52,7 @@ app.post('/todos', function(req, res) {
 
 		// update
 		if (id) {
-			console.log('if element');
-			todos
-				.find({ id })
-				.assign(req.body)
-				.write();
-			res.send(req.body);
+			console.log('id should not be provided, it is an creation path, not a update one.');
 
 			// create
 		} else {
@@ -68,8 +63,32 @@ app.post('/todos', function(req, res) {
 			todos.push(newTodo).write();
 			res.send(newTodo);
 		}
+	} catch (error) {
+		console.log(error);
+		res.send('error');
+	}
+});
 
-		console.log(body);
+// update a post
+
+app.put('/todos/:id', function(req, res) {
+	try {
+		const todos = db.get('todos');
+		const { body } = req;
+
+		const { id } = body;
+		console.log({ id });
+
+		// update
+		if (id) {
+			todos
+				.find({ id })
+				.assign(req.body)
+				.write();
+			res.send(req.body);
+		} else {
+			console.log('id should not be provided, it is an update path, not a creation one.');
+		}
 	} catch (error) {
 		console.log(error);
 		res.send('error');
@@ -90,6 +109,8 @@ app.delete('/todos/:id', function(req, res) {
 	}
 });
 
-app.listen(4000, function() {
-	console.log(`Example app listening on port ${4000}`);
+const PORT = 5000;
+
+app.listen(PORT, function() {
+	console.log(`Example app listening on port ${PORT}`);
 });
